@@ -16,7 +16,9 @@ The clinically accepted prostate plans are done to 70Gy while the leaf width pla
 ### Prostate Box Plots (qualityIndicatorBoxPlots.py)
 This code returns a box and whisker plot of the prostate patient data. The box and whisker plot will show the qi's of all three MLC leaf widths with respect to the clinically accepted values and a horizontal line indicating where the difference is 0.
 
-Select a qi from the QualIndi list and type it into line 5 where prompted. Run the code to generate the box and whisker plot. To compare absolute values (as opposed to difference between clinically planned values), comment out lines 37 & 38.
+To run, select a qi from the QualIndi list and type it into line 5 where prompted. Run the code to generate the box and whisker plot. To compare absolute values (as opposed to difference between clinically planned values), comment out lines 37 & 38.
 
-### Prostate QI v Volume ()
+### Prostate QI v Volume (QIvVolume.py)
+This code returns a scatter plot of a qi against Volume [cc]. All three leaf widths will be on the same plot with a corresponding trendline.
 
+To run, select a qi from the QualIndi list and type it into line 5 where prompted. Run the code to generate the scatter plot.
