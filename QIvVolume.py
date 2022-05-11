@@ -46,7 +46,7 @@ c = [0,0,0] # Y-Intercept array
 plt.figure(figsize=(12,8))
 ax = plt.gca()
 for i in range(3):  # Loop through each leaf width
-    df[i].plot('Volume',col, ax=ax, kind='scatter',c=color[i],s=50). #  Scatter plot QI against Volume
+    df[i].plot('Volume', col, ax=ax, kind='scatter', c=color[i], s=50) #  Scatter plot QI against Volume
     x = list(df[i]['Volume'])
     z = np.polyfit(x,list(df[i][col]), 1) # Calulate trendline of data
     p = np.poly1d(z)
