@@ -9,11 +9,13 @@ QualIndi = ['Volume','CI','HI','CTV_D98','PTV_D2','PTV_D1','PTV_D99','PTV_D98','
                              'Rectum_V35','Rectum_V30','Rectum_V25','Rectum_V20']
 Patients = ['004','005','006','007','008','011','002','010','001','003','009']    # Patient order based on order of appearance in .csv
 
+#  Set up dataFrames
 df_25mm = pd.DataFrame(columns= QualIndi, index= Patients) #   2.5mm Leaf Width Quality Indicators
 df_5mm  = pd.DataFrame(columns= QualIndi, index= Patients) #     5mm Leaf Width Quality Indicators
 df_10mm = pd.DataFrame(columns= QualIndi, index= Patients) #    10mm Leaf Width Quality Indicators
 df_clin = pd.DataFrame(columns= QualIndi, index= Patients) # Clinically Planned Quality Indicators
 
+#  Sort prostate data into dataFrames
 with open('ProstateData.csv', 'r') as file:
     data = file.read().splitlines()
     for pat in Patients:             # Loop through each Patient
