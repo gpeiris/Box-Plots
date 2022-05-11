@@ -2,10 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-Patients = ['004','005','006','007','008','011','002','010','001','003','009']    # Patient order based on order of appearance in .csv
+col = 'PTV_D1' # Pick a Quality Indicator
+
 QualIndi = ['Volume','CI','HI','CTV_D98','PTV_D2','PTV_D1','PTV_D99','PTV_D98','Bladder_V60','Bladder_V50',
             'Bladder_V45','Bladder_V40','Bladder_V30','Rectum_V60','Rectum_V57','Rectum_V50','Rectum_V45',
                              'Rectum_V35','Rectum_V30','Rectum_V25','Rectum_V20']
+Patients = ['004','005','006','007','008','011','002','010','001','003','009']    # Patient order based on order of appearance in .csv
 
 df_25mm = pd.DataFrame(columns= QualIndi, index= Patients) #   2.5mm Leaf Width Quality Indicators
 df_5mm  = pd.DataFrame(columns= QualIndi, index= Patients) #     5mm Leaf Width Quality Indicators
@@ -26,8 +28,6 @@ with open('ProstateData.csv', 'r') as file:
             df_5mm.loc[pat][qi] = float(QI5[11+j])
             df_10mm.loc[pat][qi] = float(QI10[11+j])
             df_clin.loc[pat][qi] = float(QIC[33+j])
-            
-col = 'PTV_D1' # Pick a Quality Indicator
 
 # By default will show difference from clinically planned value 
 fig = plt.figure(figsize =(10, 7))
