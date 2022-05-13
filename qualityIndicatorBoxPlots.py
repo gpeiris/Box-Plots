@@ -2,6 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+font    = {'fontname':'times new roman'}
+title_size = 20
+label_size = 14
+
 col = 'PTV_D1' # Pick a Quality Indicator
 
 QualIndi = ['Volume','CI','HI','CTV_D98','PTV_D2','PTV_D1','PTV_D99','PTV_D98','Bladder_V60','Bladder_V50',
@@ -37,13 +41,15 @@ ax = fig.add_subplot(111)
 x,y,z,c = list(df_25mm[col]), list(df_5mm[col]), list(df_10mm[col]), list(df_clin[col])
 X,Y,Z,C = [float(i) for i in x], [float(i) for i in y], [float(i) for i in z], [float(i) for i in c]
 X,Y,Z = np.subtract(X,C), np.subtract(Y,C), np.subtract(Z,C) # Comment out this line for an absolute value comparison
-plt.axhline(y=0)                                             # Comment out this line for an absolute value comparison
+plt.axhline(y=0,color='orange')                              # Comment out this line for an absolute value comparison
 bp = ax.boxplot([X,Y,Z],patch_artist = True)
 ax.set_xticklabels(['2.5mm', '5mm','10mm'])
 
 colors = ['steelblue','limegreen','indianred']
 
-plt.title(col+" Different MLC Leaf Widths for Prostate Patients")
+plt.title(col+" Different MLC Leaf Widths for Prostate Patients",**font,fontsize=title_size)
+plt.xlabel('MLC Leaf Width [mm]',**font,fontsize=label_size)
+plt.ylabel(col.replace("_",' ')+' [%]',**font,fontsize=label_size)
 
 for patch, color in zip(bp['boxes'], colors):
     patch.set_facecolor(color)
