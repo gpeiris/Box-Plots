@@ -32,36 +32,39 @@ df_clin = pd.DataFrame(columns= QualIndi, index= Patients) # Clinically Planned 
 #  Sort patient data into dataFrames
 with open(dataFile, 'r') as file:
     data = file.read().splitlines()
-    for pat in Patients:            # Loop through each Patient
+    for pat in Patients:             # Loop through each Patient
         i = Patients.index(pat)
-        QI2 = data[4+i].split(',')
-        QI5 = data[18+i].split(',')
-        QI10 = data[32+i].split(',')
-        QIC = data[4+i].split(',')
-        for qi in QualIndi:         # Loop through each Quality Indicator
+        QI2 = data[1+3*i].split(',')
+        QI5 = data[2+3*i].split(',')
+        QI10 = data[3+3*i].split(',')
+        #QIC = data[4+i].split(',')
+        for qi in QualIndi:          # Loop through each Quality Indicator
             j = QualIndi.index(qi)
-            df_25mm.loc[pat][qi] = float(QI2[11+j])
-            df_5mm.loc[pat][qi] = float(QI5[11+j])
-            df_10mm.loc[pat][qi] = float(QI10[11+j])
-            df_clin.loc[pat][qi] = float(QIC[C_col+j])
-
-# By default will show difference from clinically planned value 
-fig = plt.figure(figsize =(10, 7))
-ax = fig.add_subplot(111)
-x,y,z,c = list(df_25mm[col]), list(df_5mm[col]), list(df_10mm[col]), list(df_clin[col])
-X,Y,Z,C = [float(i) for i in x], [float(i) for i in y], [float(i) for i in z], [float(i) for i in c]
-#X,Y,Z = np.subtract(X,C), np.subtract(Y,C), np.subtract(Z,C) # Comment out this line for an absolute value comparison
-#plt.axhline(y=0,color='orange')                              # Comment out this line for an absolute value comparison
-bp = ax.boxplot([X,Y,Z],patch_artist = True)
-ax.set_xticklabels(['2.5', '5','10'])
+            df_25mm.loc[pat][qi] = float(QI2[4+j])
+            df_5mm.loc[pat][qi] = float(QI5[4+j])
+            df_10mm.loc[pat][qi] = float(QI10[4+j])
+            #df_clin.loc[pat][qi] = float(QIC[C_col+j])
 
 colors = ['steelblue','limegreen','indianred']
 
-plt.title(col+" Different MLC Leaf Widths for "+site+" Patients",**font,fontsize=title_size)
-plt.xlabel('MLC Leaf Width [mm]',**font,fontsize=label_size)
-plt.ylabel(col.replace("_",' ')+' [%]',**font,fontsize=label_size)
+for col in QualIndi: # Loop through all metrics 
+# By default will show difference from clinically planned value 
+    fig = plt.figure(figsize =(10, 7))
+    ax = fig.add_subplot(111)
+    x,y,z,c = list(df_25mm[col]), list(df_5mm[col]), list(df_10mm[col]), list(df_clin[col])
+    X,Y,Z,C = [float(i) for i in x], [float(i) for i in y], [float(i) for i in z], [float(i) for i in c]
+    #X,Y,Z = np.subtract(X,C), np.subtract(Y,C), np.subtract(Z,C) # Comment out this line for an absolute value comparison
+    #plt.axhline(y=0,color='orange')                              # Comment out this line for an absolute value comparison
+    bp = ax.boxplot([X,Y,Z],patch_artist = True)
+    ax.set_xticklabels(['2.5', '5','10'])
 
-for patch, color in zip(bp['boxes'], colors):
-    patch.set_facecolor(color)
+    plt.title(col+" Different MLC Leaf Widths for "+site+" Patients",**font,fontsize=title_size)
+    plt.xlabel('MLC Leaf Width [mm]',**font,fontsize=label_size)
+    plt.ylabel(col.replace("_",' ')+' [%]',**font,fontsize=label_size)
 
-plt.show()
+    for patch, color in zip(bp['boxes'], colors):
+        patch.set_facecolor(color)
+    
+    plt.savefig('outputFigures/Boxplots/' + site + '_' + col + '.png', dpi=600, transparent=True)
+    plt.show()
+    plt.close()
