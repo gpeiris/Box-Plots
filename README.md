@@ -26,3 +26,4 @@ To run, select an anatomical site and type it into line 5 where prompted. Run th
 ### Approximation Comparison (IMRTvVMAT.py)
 Due to technical constraints, a VMAT compromise was necessary for the 10mm leaf width treatment plans. The two competing options were between a 15 field IMRT or using VMAT with a small portion of the Millennium 120 MLC. There is a clear advantage in using VMAT over an IMRT approximation, however, if the target ever exceeds the limited treatment region, this comparison test will provide a baseline to determine whether or not we can confidently use the 15 IMRT approximation.
 
+Run the code to generate the box and whisker plot which will appear in a folder marked "output_IMRTvVMAT". All comparisons will be for Prostate patients.
