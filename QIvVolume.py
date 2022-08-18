@@ -19,7 +19,7 @@ if site == 'PROSTATE':
     C_col    = 33
     dataFile = 'ProstateData.csv'
 if site == 'LUNG':
-    Patients = ['002','003','004','005','006','007','008','009','010','011','001']
+    Patients = ['012','001','002','004','005','006','007','008','009','010']
     QualIndi = ['Volume','CI','HI','CTV_D100','PTV_D2','PTV_D98','BPlexL_D0','BPlexR_0','Heart_V50','Lung_V20',
             'Lung_V5','Lung_V30','Oesophagus_D0']
     C_col    = 26
