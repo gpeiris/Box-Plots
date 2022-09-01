@@ -10,7 +10,14 @@ font    = {'fontname':'times new roman'}
 title_size = 20
 label_size = 14
 
-site = 'LIVER' # Pick an anatomical site from {PROSTATE, LUNG, LIVER}
+siteSet = ['PROSTATE', 'LUNG', 'LIVER']
+
+while True:
+    site = input('Which anatomical site {PROSTATE, LUNG, LIVER}?: ')
+    if site in siteSet:
+        break
+    else:
+        print('Pick an anatomical site from {PROSTATE, LUNG, LIVER}')
 
 if site == 'PROSTATE':
     Patients = ['002','003','004','006','007','008','009','010','011','012','013','014']  # Patient order based on order of appearance in .csv
