@@ -1,8 +1,28 @@
 # Box Plots
-This code presents the patient's treatment plan quality indicators (qi) as planned by Varian Eclipse. Each patient was planned 4 times: 3 with different Multi-Leaf Collimators (MLC) with leaf widths of 2.5mm, 5mm and 10mm; and the clinically accepted plan. There is currently data for two anatomical sites: Prostate and Lung.
+This code presents the patient's treatment plan quality indicators (qi) as planned by Varian Eclipse. Each patient was planned 4 times: 3 with different Multi-Leaf Collimators (MLC) with leaf widths of 2.5mm, 5mm and 10mm; and the clinically accepted plan. There is currently data for three anatomical sites: Prostate, Lung and Liver.
 
 ## Requirements
-For this code to work, you will need to provide a .csv file matching the format of the template provided. All volumes are in centimetres cubed [cc]
+For this code to work, you will need to provide a .csv file matching the format of the template provided. All volumes are in centimetres cubed [cc].
+
+Python packages used are numpy, matplotlib and pandas.
+
+## Quality Indicators
+### Target Related Dose Metrics
+* PTV_DXX% - Percentage of the Planning Target Volume with XX% of dose
+* GTV_DXX% - Percentage of the Gross Target Volume with XX% of dose
+* CTV_DXX% - Percentage of the Clinical Target Volume with XX% of dose
+
+### Target Related Plan Metrics
+* Conformity Index (CI) - Volume of planned dose / planned target volume
+* Average Leaf Pair Opening (ALPO) - Average distance, in mm, between opposing leaf pairs during treatment
+* Monitor Units (MU/Gy) - Monitor Units per Gy of planned dose
+* Homogeneity Index (HI) - Uniformity of dose distribution across planned target volume, calculated as below: 
+
+$$ HI = {PTV_D2 - PTV_D98} \over {Target Dose} $$
+
+### Organs-At-Risk Related Dose Metrics
+* OAR_VXXGy - Percentage of the OAR Volume with XXGy of dose
+* OAR_DXXcc - Volume of the OAR with XXGy of dose
 
 ## Bugs
 ...
@@ -16,7 +36,7 @@ The clinically accepted prostate plans are done to 70Gy while the leaf width pla
 ### Site Box Plots (qualityIndicatorBoxPlots.py)
 This code returns all box and whisker plots of the patient data for a given anatomical site. The box and whisker plot will show the qi's of all three MLC leaf widths.
 
-To run, select an anatomical site and type it into line 5 where prompted. Run the code to generate the box and whisker plot which will appear in a folder marked "Boxplots".
+Run the code and you will be prompted to select an anatomical site. Select from PROSTATE, LUNG and LIVER (all caps) and hit enter to generate the box and whisker plot. Uncomment line 93 to save figures in a folder marked 'Boxplots'.
 
 ### Site QI v Volume (QIvVolume.py)
 This code returns a scatter plot of a qi against Volume [cc]. All three leaf widths will be on the same plot with a corresponding trendline.
