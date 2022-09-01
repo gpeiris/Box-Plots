@@ -13,7 +13,9 @@ Python packages used are numpy, matplotlib and pandas.
 * CTV_DXX% - Percentage of the Clinical Target Volume with XX% of dose
 
 ### Target Related Plan Metrics
-* Conformity Index (CI) - Volume of planned dose / planned target volume
+* Conformity Index (CI) - Consistency between planned volume and treated volume :
+
+$$ Treated Dose Volume \over Planned Target Volume $$
 * Average Leaf Pair Opening (ALPO) - Average distance, in mm, between opposing leaf pairs during treatment
 * Monitor Units (MU/Gy) - Monitor Units per Gy of planned dose
 * Homogeneity Index (HI) - Uniformity of dose distribution across planned target volume, calculated as below: 
