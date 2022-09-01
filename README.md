@@ -18,7 +18,7 @@ Python packages used are numpy, matplotlib and pandas.
 * Monitor Units (MU/Gy) - Monitor Units per Gy of planned dose
 * Homogeneity Index (HI) - Uniformity of dose distribution across planned target volume, calculated as below: 
 
-$$ HI = {PTV D2 - PTV D98} \over {Target Dose} $$
+$$ HI = {{PTV D2 - PTV D98} \over {Target Dose}} $$
 
 ### Organs-At-Risk Related Dose Metrics
 * OAR_VXXGy - Percentage of the OAR Volume with XXGy of dose
