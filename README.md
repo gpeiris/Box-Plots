@@ -24,7 +24,7 @@ $$ HI = {{PTV D2 - PTV D98} \over {Target Dose}} $$
 
 ### Organs-At-Risk Related Dose Metrics
 * OAR_VXXGy - Percentage of the OAR Volume with XXGy of dose
-* OAR_DXXcc - Volume of the OAR with XXGy of dose
+* OAR_DXXcc - The dose being recieved by XXcc of the OAR
 
 ## Bugs
 ...
