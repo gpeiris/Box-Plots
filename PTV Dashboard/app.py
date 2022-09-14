@@ -67,24 +67,12 @@ app.layout = html.Div(children=[
 						config={'displayModeBar':False},
 						animate=True
 					),
+                                        dcc.Graph(id='volumePlot',
+                                                config={'displayModeBar':False},
+						animate=True
+                                        ),
 				]
 			), # Define the 2.5mm Box Plot 
-                        """html.Div(className='three columns div-for-charts bg-grey',
-				children=[
-					dcc.Graph(id='5mm',
-						config={'displayModeBar':False},
-						animate=True
-					),
-				]
-			), # Define the 5mm element
-                        html.Div(className='three columns div-for-charts bg-grey',
-				children=[
-                                        dcc.Graph(id='10mm',
-						config={'displayModeBar':False},
-						animate=True
-					),
-				]
-			) # Define the 10mm element"""
 		]
 	)
 ])
@@ -117,6 +105,45 @@ def update_25mm(site_dropdown_val, dose_met):
 				autosize=True,
 				title={'text': 'Box and Whisker Plot for '+dose_met+' (2.5mm leaf Width)','font':{'color':'white'},'x':0.5},
 				xaxis={'title': xLabelArray[DVH_arr.index(dose_met)]},
+	),
+	}
+	return figure
+
+@app.callback(Output('volumePlot','figure'),
+			[Input('siteselector','value'),
+                        Input('dvhselector','value')
+			]
+)
+def update_VolPlot(site_dropdown_val, dose_met):
+	trace = []
+	df_sub = pd.DataFrame([[0,0,0,0,0,0,0,0,0]],columns = ['PlanID','Site','PTVD2','PTVD98','CI_RTOG100','ALPO','MUPerGy','Volume','HI'])
+	for site in site_dropdown_val:
+                df_sub = df_sub.append(df[df['Site'] == site])
+	for leaf in leavesArray:
+                trace.append(go.Scatter(x=df_sub[df_sub['PlanID'] == leaf]['Volume'],
+                                        y=df_sub[df_sub['PlanID'] == leaf][dose_met],
+                                        mode='markers',
+                                        opacity=0.7,
+                                        name=leaf,
+                                        textposition='bottom center'
+					)
+		)
+                traces = [trace]
+                min_vol = df_sub['Volume'][list(df_sub['Volume']).index(sorted(df_sub['Volume'])[1])]
+                min_dmt = df_sub[dose_met][list(df_sub[dose_met]).index(sorted(df_sub[dose_met])[1])]
+	data = [val for sublist in traces for val in sublist]
+	figure={'data':data,
+			'layout':go.Layout(
+				colorway=[],
+				template='plotly_dark',
+				paper_bgcolor='rgba(0,0,0,0)',
+				plot_bgcolor='rgba(0,0,0,0)',
+				margin={'b':15},
+				hovermode='x',
+				autosize=True,
+				title={'text': 'Volume v '+dose_met+' for Leaf Width','font':{'color':'white'},'x':0.5},
+				yaxis={'title': xLabelArray[DVH_arr.index(dose_met)], 'range':[min_dmt*0.8,df_sub[dose_met].max()*1.2]},
+                                xaxis={'title': 'Volume [cc]','range':[min_vol*0.8,df_sub['Volume'].max()+20]},
 	),
 	}
 	return figure
