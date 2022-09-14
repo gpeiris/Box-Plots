@@ -35,6 +35,11 @@ The patients have all been planned using VMAT, however due to technical constrai
 The clinically accepted prostate plans are done to 70Gy while the leaf width plans have a max dose of 60Gy. To make sure any comparisons are valid, PTV and CTV values are compared as a percetage of dose, while organs at risk are compared by asolute dose in volume.
 
 ## How It Works
+### Dashboard 
+The dashboard in the PTV Dashboard directory is an interactive visualisation tool to investigate the plots below. To run this code, you will need to ensure all relevant packages are installed, listed in requirements.txt. The dashboard will run on a local development server accessible via any internet browser.
+
+For more detailed control, use the code provided below.
+
 ### Site Box Plots (qualityIndicatorBoxPlots.py)
 This code returns all box and whisker plots of the patient data for a given anatomical site. The box and whisker plot will show the qi's of all three MLC leaf widths.
 
